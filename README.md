@@ -42,18 +42,18 @@ The chessboard is assumed to be fixed onthe (x, y) plain at z=0, such that the o
 
 The `Camera` class is defined to encapsulate the calibration and image correction concepts.
 
-Distortion correction is applied to a test image using the cv2.undistort() function and obtained this result:
+Distortion correction is applied to a test image using the cv2.undistort() function and obtained this result in the second code cell of the notebook:
 
 ![alt text][image1]
 
 ###Pipeline (single images)
 
 ####1. Provide an example of a distortion-corrected image.
-One test image was randomly selected and corrected as show below:
+One test image was randomly selected and corrected in the third code cell of the notebook:
 ![alt text][image2]
 
 ####2. Describe how (and identify where in your code) you used color transforms, gradients or other methods to create a thresholded binary image.  Provide an example of a binary image result.
-I used a combination of color and gradient thresholds to generate a binary image (thresholding steps at lines # through # in `another_file.py`).  Here's an example of my output for this step.  (note: this is not actually from one of the test images)
+A combination of color and gradient thresholds is used to generate a binary image (thresholding steps in the fourth code cell of the notebook).  Here's an example of my output for this step.  (note: this is not actually from one of the test images)
 
 ![alt text][image3]
 
