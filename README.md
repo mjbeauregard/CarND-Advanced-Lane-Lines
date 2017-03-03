@@ -130,7 +130,7 @@ The still image pipeline is finally assembled into a video pipeline for the give
 
 The radius of curvature is calculated for each frame after lane detection and a simple sanity check is performed to filter out curves with an unreasonably small radius. This check is a bit naive but works well enough for this simplified project. If a frame's lane detection is rejected, it simply uses the curve from the previous frame. When the radius for each lane is displayed in the HUD, the text is shown in green when the current frame detected a "sane" curve, otherwise it is show in red.
 
-Here's a [link to the video output](./output.mp4)
+Here's a [link to the video output](https://youtu.be/xGDEj1xNkgE)
 
 ---
 
