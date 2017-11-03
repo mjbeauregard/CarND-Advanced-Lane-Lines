@@ -23,17 +23,17 @@ The goals / steps of this project are the following:
 [video1]: ./project_video.mp4 "Video"
 
 ## [Rubric](https://review.udacity.com/#!/rubrics/571/view) Points
-###Here I will consider the rubric points individually and describe how I addressed each point in my implementation.
+### Here I will consider the rubric points individually and describe how I addressed each point in my implementation.
 
 ---
-###Writeup / README
+### Writeup / README
 
-####1. Provide a Writeup / README that includes all the rubric points and how you addressed each one.  You can submit your writeup as markdown or pdf.  [Here](https://github.com/udacity/CarND-Advanced-Lane-Lines/blob/master/writeup_template.md) is a template writeup for this project you can use as a guide and a starting point.
+#### 1. Provide a Writeup / README that includes all the rubric points and how you addressed each one.  You can submit your writeup as markdown or pdf.  [Here](https://github.com/udacity/CarND-Advanced-Lane-Lines/blob/master/writeup_template.md) is a template writeup for this project you can use as a guide and a starting point.
 
 You're reading it!
-###Camera Calibration
+### Camera Calibration
 
-####1. Briefly state how you computed the camera matrix and distortion coefficients. Provide an example of a distortion corrected calibration image.
+#### 2. Briefly state how you computed the camera matrix and distortion coefficients. Provide an example of a distortion corrected calibration image.
 
 The code for this step is contained in the first and second code cells of the IPython notebook located in "./examples/example.ipynb" (or in lines # through # of the file called `some_file.py`).
 
@@ -47,13 +47,13 @@ Distortion correction is applied to a test image using the cv2.undistort() funct
 
 ![alt text][undistort_chessboard]
 
-###Pipeline (single images)
+### Pipeline (single images)
 
-####1. Provide an example of a distortion-corrected image.
+#### 1. Provide an example of a distortion-corrected image.
 One test image was randomly selected and corrected in the fourth code cell of the notebook:
 ![alt text][undistort_road]
 
-####2. Describe how (and identify where in your code) you used color transforms, gradients or other methods to create a thresholded binary image.  Provide an example of a binary image result.
+#### 2. Describe how (and identify where in your code) you used color transforms, gradients or other methods to create a thresholded binary image.  Provide an example of a binary image result.
 A combination of color and gradient thresholds is used to generate a binary image (thresholding steps in the fifth code cell of the notebook).
 
 The binary image is generated using a combination of horizontal gradient threshold with a saturation threshold (see the fifth code cell of the notebook). Each of these thresholds has different strenghts for different lighting conditions and together produce a better threshold than alone.
@@ -62,7 +62,7 @@ Here's an example output for this step:
 
 ![alt text][binary_threshold]
 
-####3. Describe how (and identify where in your code) you performed a perspective transform and provide an example of a transformed image.
+#### 3. Describe how (and identify where in your code) you performed a perspective transform and provide an example of a transformed image.
 
 The code for the perspective transform includes a function called `warperbirds_eye_warp()`, which is in the 6th code cell of the notebook.  This function takes as inputs an image (`img`) and selects the source `src` and destination (`dst`) points for the transform.  The hardcoded the source and destination points were chosen experimentally using a test image and resulted in the following final values:
 
@@ -92,7 +92,7 @@ The prespective transform was verified to work as expected by drawing the `src` 
 
 ![alt text][perspective_transform]
 
-####4. Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?
+#### 4. Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?
 
 The lane finding function called `find_lanes()` uses the suggested algorithm whereby a histogram of the bottom half of the binary (corrected) image is analyzed to find peak values of each the left and right halves of the histogram. These values are used as the starting point for the lane search algorith (see the 7th code cell in the notebook).
 
@@ -108,11 +108,11 @@ The following image shows the area of the image used to fit the polynomials for 
 
 ![alt text][update_lanes]
 
-####5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
+#### 5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
 
 The next code cell (9th) calculates the radius of curvature for each lane polynomial using the suggested method. The vehicles position within the lane is also calculated by assuming camera is positioned at the center of the vehicle and thus is at exactly the halfway point of the image. The offset of each lane line from the center of the image indicates whether the vehicle closer to one lane or the other and by how much. An offset of 0 indicates the vehicle is in exactly the center of the lane. Negative values indicate the vehicle is closer to the left lane and positive indicates closer to the right lane.
 
-####6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
+#### 6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
 
 The lane curves are projected back onto the original (corrected) image in the 10th code cell of the notebook. The curves identified by the lane finding algorithm are draw as a filled polygon then warped back to the original perspective using the `M_inv` inverse projection matrix. The resulting warped polygon is then composited over the original (corrected) image to correctly identify the lane. The radius of curvature for each lane and the vehicle lane position is also displayed in a HUD overlay.
 
@@ -122,9 +122,9 @@ Here is an example of output on a test image:
 
 ---
 
-###Pipeline (video)
+### Pipeline (video)
 
-####1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (wobbly lines are ok but no catastrophic failures that would cause the car to drive off the road!).
+#### 1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (wobbly lines are ok but no catastrophic failures that would cause the car to drive off the road!).
 
 The still image pipeline is finally assembled into a video pipeline for the given test video. The 11th code cell of the notebook dfines the class `LaneFinder` that is initialized with a calibrated camara. The first frame is processed using the full lane search `find_lanes()` to initially identify the lanes. Subsequent frames use the `update_lanes()` in order to leverage the coherency bewteen frames which stabilizes the lane tracking process.
 
@@ -134,9 +134,9 @@ Here's a [link to the video output](https://youtu.be/xGDEj1xNkgE)
 
 ---
 
-###Discussion
+### Discussion
 
-####1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
+#### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
 
 There were a few places in the video where the color of the pavement is much lighter which reduces the contrast between the road and the laner markers to become difficult to properly threshold. Improvments to further stabilize the thresholding process are an obvious place to start.
 
