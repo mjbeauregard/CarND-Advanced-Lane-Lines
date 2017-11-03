@@ -28,12 +28,12 @@ The goals / steps of this project are the following:
 ---
 ### Writeup / README
 
-#### 1. Provide a Writeup / README that includes all the rubric points and how you addressed each one.  You can submit your writeup as markdown or pdf.  [Here](https://github.com/udacity/CarND-Advanced-Lane-Lines/blob/master/writeup_template.md) is a template writeup for this project you can use as a guide and a starting point.
+#### Provide a Writeup / README that includes all the rubric points and how you addressed each one.  You can submit your writeup as markdown or pdf.  [Here](https://github.com/udacity/CarND-Advanced-Lane-Lines/blob/master/writeup_template.md) is a template writeup for this project you can use as a guide and a starting point.
 
 You're reading it!
 ### Camera Calibration
 
-#### 2. Briefly state how you computed the camera matrix and distortion coefficients. Provide an example of a distortion corrected calibration image.
+#### Briefly state how you computed the camera matrix and distortion coefficients. Provide an example of a distortion corrected calibration image.
 
 The code for this step is contained in the first and second code cells of the IPython notebook located in "./examples/example.ipynb" (or in lines # through # of the file called `some_file.py`).
 
@@ -124,7 +124,7 @@ Here is an example of output on a test image:
 
 ### Pipeline (video)
 
-#### 1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (wobbly lines are ok but no catastrophic failures that would cause the car to drive off the road!).
+#### Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (wobbly lines are ok but no catastrophic failures that would cause the car to drive off the road!).
 
 The still image pipeline is finally assembled into a video pipeline for the given test video. The 11th code cell of the notebook dfines the class `LaneFinder` that is initialized with a calibrated camara. The first frame is processed using the full lane search `find_lanes()` to initially identify the lanes. Subsequent frames use the `update_lanes()` in order to leverage the coherency bewteen frames which stabilizes the lane tracking process.
 
@@ -136,7 +136,7 @@ Here's a [link to the video output](https://youtu.be/xGDEj1xNkgE)
 
 ### Discussion
 
-#### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
+#### Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
 
 There were a few places in the video where the color of the pavement is much lighter which reduces the contrast between the road and the laner markers to become difficult to properly threshold. Improvments to further stabilize the thresholding process are an obvious place to start.
 
